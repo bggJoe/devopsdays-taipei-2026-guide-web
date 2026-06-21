@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DevOpsDays Taipei 2026 Session Explorer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div>
+        <p class="eyebrow">DevSecOps / RAI / AI Coding Focus</p>
+        <h1>DevOpsDays Taipei 2026 Session Explorer</h1>
+      </div>
+      <nav class="top-nav" aria-label="主要導覽">
+        <a href="#overview">總覽</a>
+        <a href="#path">推薦路線</a>
+        <a href="#explorer">探索</a>
+        <a href="#outcomes">會後輸出</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="overview" class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">內容漸進式導讀</p>
+          <h2>先理解大會，再依你的 DevSecOps / RAI / AI Coding 目標挑 session</h2>
+          <p id="overview-text"></p>
+          <div class="hero-actions">
+            <a class="button primary" href="#path">查看推薦路線</a>
+            <a class="button" href="#explorer">開始探索 session</a>
+          </div>
+        </div>
+        <aside class="summary-card" aria-label="大會摘要">
+          <dl>
+            <div><dt>Summit</dt><dd id="meta-summit"></dd></div>
+            <div><dt>時間</dt><dd id="meta-dates"></dd></div>
+            <div><dt>地點</dt><dd id="meta-venue"></dd></div>
+            <div><dt>角色背景</dt><dd id="meta-role"></dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container">
+        <div class="section-title">
+          <p class="eyebrow">Scoring</p>
+          <h2>題目與評分模型</h2>
+          <p>分數代表直接價值；魔力代表 AI 資安與 AI Coding 的探索價值。同分時優先看魔力高的場次。</p>
+        </div>
+        <div id="score-grid" class="score-grid"></div>
+      </div>
+    </section>
+
+    <section id="path" class="section tinted">
+      <div class="container">
+        <div class="section-title">
+          <p class="eyebrow">Recommended Path</p>
+          <h2>不衝突推薦路線</h2>
+          <p id="path-summary"></p>
+        </div>
+        <div id="recommended-path" class="timeline"></div>
+      </div>
+    </section>
+
+    <section id="explorer" class="section">
+      <div class="container">
+        <div class="section-title">
+          <p class="eyebrow">Explore</p>
+          <h2>依分組探索所有 session</h2>
+          <p>搜尋或篩選後，點開卡片即可查看導讀、關鍵字、分數與 checklist。</p>
+        </div>
+
+        <div class="filters" aria-label="Session 篩選器">
+          <label>搜尋<input id="search" type="search" placeholder="搜尋 title / speaker / keyword..." /></label>
+          <label>Day<select id="day-filter"><option value="all">All</option><option value="Day 1">Day 1</option><option value="Day 2">Day 2</option></select></label>
+          <label>Group<select id="group-filter"><option value="all">All</option></select></label>
+          <label>Topic<select id="topic-filter"><option value="all">All</option></select></label>
+          <label>排序<select id="sort-filter"><option value="time">時間</option><option value="score">分數高到低</option><option value="magic">魔力高到低</option></select></label>
+          <label class="checkbox-label"><input id="recommended-only" type="checkbox" />只看推薦</label>
+        </div>
+
+        <p id="result-count" class="result-count"></p>
+        <div id="session-grid" class="session-grid"></div>
+      </div>
+    </section>
+
+    <section id="outcomes" class="section tinted">
+      <div class="container">
+        <div class="section-title"><p class="eyebrow">After Summit</p><h2>會後應該帶回公司的成果</h2></div>
+        <div id="outcome-grid" class="outcome-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="session-dialog" class="session-dialog">
+    <div class="dialog-header">
+      <div><p id="dialog-meta" class="eyebrow"></p><h2 id="dialog-title"></h2></div>
+      <button id="dialog-close" class="icon-button" aria-label="關閉">×</button>
+    </div>
+    <div id="dialog-body" class="dialog-body"></div>
+  </dialog>
+
+  <footer class="site-footer"><div class="container"><p>資料整理版本：<span id="last-reviewed"></span>。實際議程以大會當日公告為主。</p></div></footer>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
