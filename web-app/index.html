@@ -16,6 +16,7 @@
       <a href="#overview">總覽</a>
       <a href="#path">推薦路線</a>
       <a href="#explorer">探索</a>
+      <a href="#planner">我的流程</a>
       <a href="#outcomes">會後輸出</a>
     </nav>
   </header>
@@ -30,6 +31,7 @@
         <div class="hero-actions">
           <a class="button primary" href="#path">查看推薦路線</a>
           <a class="button" href="#explorer">開始探索 session</a>
+          <a class="button" href="#planner">查看我的流程</a>
         </div>
       </div>
       <aside class="reading-order" aria-labelledby="reading-order-title">
@@ -39,6 +41,7 @@
           <li>評分：理解優先順序</li>
           <li>推薦路線：先鎖定主路線</li>
           <li>分組探索：比較可替換場次</li>
+          <li>自選流程：勾選 session 並檢查衝突</li>
           <li>會後輸出：整理內部產出</li>
         </ol>
       </aside>
@@ -79,6 +82,21 @@
       </form>
       <p class="result-count" id="result-count"></p>
       <div id="session-groups" class="group-list"></div>
+    </section>
+
+    <section id="planner" class="section-card planner-section">
+      <div class="section-heading">
+        <p class="eyebrow">My Agenda</p>
+        <h2>我的自選流程</h2>
+        <p>在 Session Explorer 的卡片上按「加入我的流程」，這裡會依日期與時間排序，並自動檢查時間衝突。可用瀏覽器列印功能輸出 PDF。</p>
+      </div>
+      <div class="planner-actions">
+        <button class="button primary" type="button" id="print-plan">輸出 PDF / 列印</button>
+        <button class="button" type="button" id="clear-plan">清空我的流程</button>
+      </div>
+      <div id="planner-alerts" class="planner-alerts" aria-live="polite"></div>
+      <div id="planner-summary" class="planner-summary"></div>
+      <div id="planner-result" class="planner-result"></div>
     </section>
 
     <section id="outcomes" class="section-card">

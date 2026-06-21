@@ -28,6 +28,8 @@
     '>': '&gt;',
     '"': '&quot;',
   }[char]));
+  const selectedPlanKey = 'dodt2026:selected-plan';
+  let selectedSessionIds = new Set(JSON.parse(localStorage.getItem(selectedPlanKey) || '[]'));
   const timeKey = (session) => `${session.date || ''} ${session.start || ''}`;
   const parseSpeaker = (speaker = '') => {
     const [name = '', company = ''] = String(speaker).split(/[｜|]/).map((part) => part.trim());
@@ -43,6 +45,7 @@
     renderOutcomes();
     bindEvents();
     renderSessions();
+    renderPlanner();
     openSessionFromHash();
   }
 
@@ -195,7 +198,8 @@
     const showSpeaker = $('#show-speaker').checked;
 
     return `
-      <button class="session-card ${session.recommended ? 'is-recommended' : ''}" type="button" data-open-session="${session.id}">
+      <article class="session-card ${session.recommended ? 'is-recommended' : ''}">
+        <div class="session-open-area" role="button" tabindex="0" data-open-session="${session.id}">
         <div class="meta">${escapeHtml(session.day)}｜${escapeHtml(session.start)}–${escapeHtml(session.end)}｜${escapeHtml(session.room)}｜${escapeHtml(session.type)}</div>
         <h4>${escapeHtml(session.title)}</h4>
         ${showSpeaker ? `<p class="speaker-line"><strong>${escapeHtml(speakerInfo.name)}</strong>｜${escapeHtml(speakerInfo.company)}</p>` : ''}
@@ -204,8 +208,27 @@
         ${renderOfficialMeta(session)}
         <p>${escapeHtml(session.summary)}</p>
         <p class="keywords"><span>整理關鍵字：</span>${escapeHtml((session.keywords || []).slice(0, 8).join('、'))}</p>
+        </div>
+        ${renderPlanToggleButton(session.id)}
+      </article>
+    `;
+  }
+
+  function renderPlanToggleButton(sessionId) {
+    const isSelected = selectedSessionIds.has(sessionId);
+    return `
+      <button class="plan-toggle ${isSelected ? 'is-selected' : ''}" type="button" data-toggle-plan="${sessionId}">
+        ${isSelected ? '已加入我的流程' : '加入我的流程'}
       </button>
     `;
+  }
+
+  function refreshPlanToggleButtons() {
+    document.querySelectorAll('[data-toggle-plan]').forEach((button) => {
+      const isSelected = selectedSessionIds.has(button.dataset.togglePlan);
+      button.classList.toggle('is-selected', isSelected);
+      button.textContent = isSelected ? '已加入我的流程' : '加入我的流程';
+    });
   }
 
   function analyzePersonas(session) {
@@ -256,6 +279,9 @@
       <p>${(session.keywords || []).map((keyword) => `<span class="badge">${escapeHtml(keyword)}</span>`).join(' ')}</p>
       <h3>聆聽目標</h3>
       <p>${escapeHtml(session.objective || '此場次未列入主推薦路線，可作為分組探索或備選參考。')}</p>
+      <div class="dialog-plan-action">
+        ${renderPlanToggleButton(session.id)}
+      </div>
       <h3>Checklist</h3>
       ${renderChecklist(session)}
       ${session.session_url ? `<p><a class="button primary" href="${escapeHtml(session.session_url)}" target="_blank" rel="noreferrer">Official session URL</a></p>` : ''}
@@ -325,14 +351,140 @@
     $('#filters').addEventListener('input', renderSessions);
     $('#filters').addEventListener('change', renderSessions);
     $('.close').addEventListener('click', () => $('#session-dialog').close());
+    $('#print-plan').addEventListener('click', () => window.print());
+    $('#clear-plan').addEventListener('click', clearPlanner);
     $('#session-dialog').addEventListener('click', (event) => {
       if (event.target === $('#session-dialog')) $('#session-dialog').close();
     });
     document.addEventListener('click', (event) => {
+      const plannerButton = event.target.closest('[data-toggle-plan]');
+      if (plannerButton) {
+        togglePlannerSession(plannerButton.dataset.togglePlan);
+        return;
+      }
+
       const button = event.target.closest('[data-open-session]');
       if (button) openSession(button.dataset.openSession);
     });
+    document.addEventListener('keydown', (event) => {
+      if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('[data-open-session]')) {
+        event.preventDefault();
+        openSession(event.target.dataset.openSession);
+      }
+    });
     window.addEventListener('hashchange', openSessionFromHash);
+  }
+
+
+
+  function togglePlannerSession(sessionId) {
+    if (selectedSessionIds.has(sessionId)) {
+      selectedSessionIds.delete(sessionId);
+    } else {
+      selectedSessionIds.add(sessionId);
+    }
+    persistPlanner();
+    renderSessions();
+    renderPlanner();
+    refreshPlanToggleButtons();
+  }
+
+  function clearPlanner() {
+    if (!selectedSessionIds.size) return;
+    selectedSessionIds = new Set();
+    persistPlanner();
+    renderSessions();
+    renderPlanner();
+    refreshPlanToggleButtons();
+  }
+
+  function persistPlanner() {
+    localStorage.setItem(selectedPlanKey, JSON.stringify([...selectedSessionIds]));
+  }
+
+  function getSelectedSessions() {
+    return [...selectedSessionIds]
+      .map((id) => sessionById[id])
+      .filter(Boolean)
+      .sort((a, b) => timeKey(a).localeCompare(timeKey(b)));
+  }
+
+  function minutesFromStart(session) {
+    const [hours, minutes] = session.start.split(':').map(Number);
+    return hours * 60 + minutes;
+  }
+
+  function minutesFromEnd(session) {
+    const [hours, minutes] = session.end.split(':').map(Number);
+    return hours * 60 + minutes;
+  }
+
+  function findConflicts(selectedSessions) {
+    const conflicts = [];
+    const byDay = selectedSessions.reduce((acc, session) => {
+      acc[session.day] = acc[session.day] || [];
+      acc[session.day].push(session);
+      return acc;
+    }, {});
+
+    Object.values(byDay).forEach((daySessions) => {
+      const sorted = [...daySessions].sort((a, b) => minutesFromStart(a) - minutesFromStart(b));
+      for (let index = 0; index < sorted.length - 1; index += 1) {
+        const current = sorted[index];
+        const next = sorted[index + 1];
+        if (minutesFromEnd(current) > minutesFromStart(next)) {
+          conflicts.push([current, next]);
+        }
+      }
+    });
+    return conflicts;
+  }
+
+  function renderPlanner() {
+    const selectedSessions = getSelectedSessions();
+    const conflicts = findConflicts(selectedSessions);
+    $('#planner-summary').textContent = selectedSessions.length
+      ? `已選 ${selectedSessions.length} 場，總分 ${selectedSessions.reduce((sum, session) => sum + session.score, 0)}，魔力 ${selectedSessions.reduce((sum, session) => sum + session.magic, 0)}。`
+      : '尚未選擇 session。請回到 Session Explorer 將想參加的場次加入我的流程。';
+
+    $('#planner-alerts').innerHTML = conflicts.length
+      ? `<div class="conflict-box"><strong>偵測到 ${conflicts.length} 組時間衝突：</strong><ul>${conflicts.map(([a, b]) => `<li>${escapeHtml(a.day)} ${escapeHtml(a.start)}–${escapeHtml(a.end)}「${escapeHtml(a.title)}」與 ${escapeHtml(b.start)}–${escapeHtml(b.end)}「${escapeHtml(b.title)}」重疊。</li>`).join('')}</ul></div>`
+      : selectedSessions.length ? '<div class="success-box">目前沒有偵測到時間衝突。</div>' : '';
+
+    $('#planner-result').innerHTML = selectedSessions.length ? renderPlannerTimeline(selectedSessions, conflicts) : renderEmptyPlanner();
+  }
+
+  function renderEmptyPlanner() {
+    return `
+      <div class="empty-planner">
+        <h3>開始設計自己的流程</h3>
+        <p>你可以從推薦路線開始，再回到 Explorer 補選備案。系統會保存在這台瀏覽器的 localStorage。</p>
+        <a class="button primary" href="#explorer">前往 Session Explorer</a>
+      </div>
+    `;
+  }
+
+  function renderPlannerTimeline(selectedSessions, conflicts) {
+    const conflictIds = new Set(conflicts.flat().map((session) => session.id));
+    let currentDay = '';
+    return selectedSessions.map((session) => {
+      const dayTitle = session.day !== currentDay ? `<h3 class="day-title">${escapeHtml(session.day)}</h3>` : '';
+      currentDay = session.day;
+      const speakerInfo = parseSpeaker(session.speaker);
+      return `
+        ${dayTitle}
+        <article class="planner-item ${conflictIds.has(session.id) ? 'has-conflict' : ''}">
+          <div class="planner-time"><strong>${escapeHtml(session.start)}–${escapeHtml(session.end)}</strong><span>${escapeHtml(session.room)}</span></div>
+          <div>
+            <h4>${escapeHtml(session.title)}</h4>
+            <p class="meta">${escapeHtml(speakerInfo.name)}｜${escapeHtml(speakerInfo.company)}｜${escapeHtml(session.type)}</p>
+            ${renderPersonaBadges(session)}
+            ${renderBadges(session)}
+          </div>
+          <button class="button" type="button" data-toggle-plan="${session.id}">移除</button>
+        </article>
+      `;
+    }).join('');
   }
 
   function openSessionFromHash() {

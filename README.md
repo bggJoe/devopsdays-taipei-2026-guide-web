@@ -29,18 +29,16 @@ http://localhost:8000/
 1. 先看「總覽」與右側閱讀順序，說明這份導覽的角色背景。
 2. 點「查看推薦路線」，展示兩天不衝突的主路線與每場 checklist。
 3. 到「探索」區使用搜尋與 Day / Group / Topic / 演講者 / 公司組織篩選，並切換「顯示講者/組織」。
-4. 點任一 session 卡片，展示摘要、關鍵字、命中題目、聆聽目標、checklist，以及「整理對象」與「原網站標示」的差異。
-5. 最後展示「會後輸出」，說明可帶回公司整理成 reference architecture、治理 checklist 與 PoC backlog。
+4. 在卡片按「加入我的流程」，建立自己的 session flow；系統會在「我的流程」區檢查時間衝突。
+5. 點任一 session 卡片，展示摘要、關鍵字、命中題目、聆聽目標、checklist，以及「整理對象」與「原網站標示」的差異。
+6. 到「我的流程」查看已選結果，使用「輸出 PDF / 列印」透過瀏覽器另存 PDF。
+7. 最後展示「會後輸出」，說明可帶回公司整理成 reference architecture、治理 checklist 與 PoC backlog。
 
-- `web-app/index.html` — page structure and sections.
-- `web-app/styles.css` — responsive visual styling.
-- `web-app/app.js` — rendering, filters, sorting, dialog details, hash links, and checklist localStorage.
-- `web-app/data.js` — browser-ready `window.SUMMIT_DATA` generated from `assets/devopsdays_2026_sessions.json`.
-- `assets/devopsdays_2026_sessions.json` — source data.
+### 以本機網址展示
 
 - `web-app/index.html`：頁面結構與各區塊 anchor。
 - `web-app/styles.css`：RWD、卡片、timeline、dialog 與篩選器樣式。
-- `web-app/app.js`：資料 render、搜尋、Day / Group / Topic / 演講者 / 公司組織篩選、排序、detail dialog、hash deep link、角色對象分析與 checklist localStorage。
+- `web-app/app.js`：資料 render、搜尋、Day / Group / Topic / 演講者 / 公司組織篩選、排序、detail dialog、hash deep link、角色對象分析、checklist localStorage、自選流程、時間衝突檢查與列印/PDF 輸出。
 - `web-app/data.js`：由 `assets/devopsdays_2026_sessions.json` 產生的瀏覽器資料檔，內容為 `window.SUMMIT_DATA = ...`。
 - `assets/devopsdays_2026_sessions.json`：議程資料來源。
 
