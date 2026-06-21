@@ -32,7 +32,11 @@ http://localhost:8000/
 4. 點任一 session 卡片，展示摘要、關鍵字、命中題目、聆聽目標、checklist，以及「整理對象」與「原網站標示」的差異。
 5. 最後展示「會後輸出」，說明可帶回公司整理成 reference architecture、治理 checklist 與 PoC backlog。
 
-## 檔案說明
+- `web-app/index.html` — page structure and sections.
+- `web-app/styles.css` — responsive visual styling.
+- `web-app/app.js` — rendering, filters, sorting, dialog details, hash links, and checklist localStorage.
+- `web-app/data.js` — browser-ready `window.SUMMIT_DATA` generated from `assets/devopsdays_2026_sessions.json`.
+- `assets/devopsdays_2026_sessions.json` — source data.
 
 - `web-app/index.html`：頁面結構與各區塊 anchor。
 - `web-app/styles.css`：RWD、卡片、timeline、dialog 與篩選器樣式。
