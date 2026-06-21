@@ -40,7 +40,7 @@ http://localhost:8000/
 - `web-app/styles.css`：RWD、卡片、timeline、dialog 與篩選器樣式。
 - `web-app/app.js`：資料 render、搜尋、Day / Group / Topic / 演講者 / 公司組織篩選、排序、detail dialog、hash deep link、角色對象分析、checklist localStorage、自選流程、時間衝突檢查與列印/PDF 輸出。
 - `web-app/data.js`：由 `assets/devopsdays_2026_sessions.json` 產生的瀏覽器資料檔，內容為 `window.SUMMIT_DATA = ...`。
-- `assets/devopsdays_2026_sessions.json`：議程資料來源。
+- `assets/devopsdays_2026_sessions.json`：議程資料來源；已為目前資料中可對應到官方 `/session/` 頁面的 session 補上官方 level、language、tags 與適合聽眾。
 
 ## 更新資料
 
