@@ -273,7 +273,7 @@
       "title": "DevSecOps 漏洞發現、追蹤與數據統計自動化分享！",
       "speaker": "何品緯｜BTSE",
       "group": "security",
-      "summary": "從 Shift Left 後的漏洞治理痛點出發，串起 SCA/SAST、DefectDojo、Jira、統計報表與追蹤流程。",
+      "summary": "從 Shift Left 後的漏洞治理痛點出發，串起 SCA/SAST、DefectDojo、Jira、統計報表與追蹤流程。 官方 session 頁也標示此場為中階、中文，tag 為 DevSecOps（測試要趁早）。",
       "keywords": [
         "DevSecOps",
         "SAST",
@@ -289,7 +289,19 @@
       "magic": 0,
       "recommended": false,
       "session_url": "https://devopsdays.tw/2026/session/4726",
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "DevSecOps（測試要趁早）"
+      ],
+      "officialAudience": [
+        "非IT部門 (Non-IT)",
+        "經營決策者 (Decision maker)",
+        "資安工程師"
+      ],
+      "speakerRole": "Security Engineer",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4726"
     },
     {
       "id": "d1-ai-dataops-mlops",

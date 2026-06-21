@@ -71,7 +71,10 @@
         <label>日期<select id="day-filter"><option value="all">All days</option></select></label>
         <label>分組<select id="group-filter"><option value="all">All groups</option></select></label>
         <label>題目<select id="topic-filter"><option value="all">All topics</option></select></label>
+        <label>演講者<select id="speaker-filter"><option value="all">All speakers</option></select></label>
+        <label>公司/組織<select id="company-filter"><option value="all">All orgs</option></select></label>
         <label>排序<select id="sort-filter"><option value="time">時間順</option><option value="score">分數高到低</option><option value="magic">魔力高到低</option></select></label>
+        <label class="checkbox"><input id="show-speaker" type="checkbox" checked /> 顯示講者/組織</label>
         <label class="checkbox"><input id="recommended-only" type="checkbox" /> 只看推薦</label>
       </form>
       <p class="result-count" id="result-count"></p>
@@ -87,9 +90,13 @@
     </section>
   </main>
 
+  <footer class="site-footer">
+    <p>資料整理版本：<span id="last-reviewed"></span>。實際議程以大會當日公告為主。</p>
+  </footer>
+
   <dialog id="session-dialog">
     <article class="dialog-card">
-      <button class="close" value="cancel" aria-label="關閉">×</button>
+      <button class="close" type="button" value="cancel" aria-label="關閉">×</button>
       <div id="session-detail"></div>
     </article>
   </dialog>
