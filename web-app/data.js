@@ -1,4 +1,4 @@
-{
+window.SUMMIT_DATA = {
   "meta": {
     "title": "DevOpsDays Taipei 2026 Session Guide for DevSecOps / RAI / AI Coding",
     "summit": "DevOpsDays Taipei 2026",
@@ -2180,4 +2180,4 @@
     "SBOM remediation workflow",
     "Release traceability policy"
   ]
-}
+};
