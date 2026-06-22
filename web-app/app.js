@@ -180,9 +180,12 @@
     $('#result-count').textContent = `顯示 ${filteredSessions.length} / ${sessions.length} 場 session`;
 
     if ($('#layout-filter').value === 'time') {
+      $('#layout-help').textContent = '此版面會打破原本 session group 分類，改用 Day 1 早到晚、Day 2 早到晚列出所有可挑選卡片；加入我的流程的狀態會與分組卡片同步。';
       renderSessionsByTime(root, filteredSessions);
       return;
     }
+
+    $('#layout-help').textContent = '此版面依主題分組瀏覽；若你想照實際議程順序挑選，請切換版面為「所有可挑選卡片（依日期/時間）」。';
 
     Object.entries(groupLabels).forEach(([groupKey, label]) => {
       const groupSessions = filteredSessions.filter((session) => session.group === groupKey);
@@ -199,7 +202,8 @@
   }
 
   function renderSessionsByTime(root, filteredSessions) {
-    const byDay = filteredSessions.reduce((acc, session) => {
+    const chronologicalSessions = [...filteredSessions].sort((a, b) => timeKey(a).localeCompare(timeKey(b)));
+    const byDay = chronologicalSessions.reduce((acc, session) => {
       acc[session.day] = acc[session.day] || [];
       acc[session.day].push(session);
       return acc;
@@ -218,7 +222,7 @@
         <div class="time-layout">
           ${Object.entries(bySlot).map(([slot, slotSessions]) => `
             <section class="time-slot">
-              <div class="time-slot-label">${escapeHtml(slot)}</div>
+              <div class="time-slot-label"><span>${escapeHtml(slot)}</span><small>${slotSessions.length} 場可選</small></div>
               <div class="time-slot-cards">${slotSessions.map(renderSessionCard).join('')}</div>
             </section>
           `).join('')}

@@ -665,3 +665,24 @@ dialog::backdrop {
     grid-template-columns: 1fr;
   }
 }
+
+.layout-help {
+  margin: 0.85rem 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f8fafc;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.time-slot-label {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.time-slot-label small {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
