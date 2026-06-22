@@ -12,24 +12,22 @@
       <p class="eyebrow">DevSecOps / RAI / AI Coding Focus</p>
       <h1>DevOpsDays Taipei 2026 Session Explorer</h1>
     </div>
-    <nav aria-label="主要導覽">
-      <a href="#overview">總覽</a>
-      <a href="#path">推薦路線</a>
-      <a href="#explorer">探索</a>
-      <a href="#planner">我的流程</a>
-      <a href="#outcomes">會後輸出</a>
+    <nav class="page-tabs" aria-label="主要頁面">
+      <button class="tab-button is-active" type="button" data-page-target="explorer-page">Session 探索/自選流程</button>
+      <button class="tab-button" type="button" data-page-target="joe-page">Joe 建議方案/評分</button>
+      <button class="tab-button" type="button" data-page-target="team-page">組員流程彙整</button>
     </nav>
   </header>
 
   <main>
-    <section id="overview" class="hero section-card">
+    <section id="overview" class="hero section-card" data-page="explorer-page">
       <div>
         <p class="eyebrow" id="summit-dates"></p>
         <h2>用資安與 AI 開發治理視角，快速找到最值得聽的場次</h2>
         <p id="summit-overview"></p>
         <p class="role" id="role-context"></p>
         <div class="hero-actions">
-          <a class="button primary" href="#path">查看推薦路線</a>
+          <button class="button primary" type="button" data-page-target="joe-page">查看 Joe 推薦路線</button>
           <a class="button" href="#explorer">開始探索 session</a>
           <a class="button" href="#planner">查看我的流程</a>
         </div>
@@ -47,7 +45,7 @@
       </aside>
     </section>
 
-    <section id="score" class="section-card">
+    <section id="score" class="section-card" data-page="joe-page">
       <div class="section-heading">
         <p class="eyebrow">Score Legend</p>
         <h2>題目評分模型</h2>
@@ -55,7 +53,7 @@
       <div id="score-legend" class="score-grid"></div>
     </section>
 
-    <section id="path" class="section-card">
+    <section id="path" class="section-card" data-page="joe-page">
       <div class="section-heading">
         <p class="eyebrow">Recommended Path</p>
         <h2>不衝突主推薦路線</h2>
@@ -64,7 +62,7 @@
       <div id="recommended-path" class="timeline"></div>
     </section>
 
-    <section id="explorer" class="section-card">
+    <section id="explorer" class="section-card" data-page="explorer-page">
       <div class="section-heading">
         <p class="eyebrow">Session Explorer</p>
         <h2>分組探索所有議程</h2>
@@ -86,7 +84,7 @@
       <div id="session-groups" class="group-list"></div>
     </section>
 
-    <section id="planner" class="section-card planner-section">
+    <section id="planner" class="section-card planner-section" data-page="explorer-page">
       <div class="section-heading">
         <p class="eyebrow">My Agenda</p>
         <h2>我的自選流程</h2>
@@ -101,7 +99,30 @@
       <div id="planner-result" class="planner-result"></div>
     </section>
 
-    <section id="outcomes" class="section-card">
+    <section id="team-plans" class="section-card" data-page="team-page" hidden>
+      <div class="section-heading">
+        <p class="eyebrow">Team Agenda Exchange</p>
+        <h2>組員流程匯入 / 跨員彙整</h2>
+        <p>每位組員可在「Session 探索/自選流程」選好自己的流程，輸入 nickname 後匯出 JSON 或 CSV；組長可在這裡匯入多位組員的 JSON，獨立彙整，不會覆蓋自己的流程。</p>
+      </div>
+      <div class="team-tools">
+        <label>我的 nickname<input id="nickname-input" type="text" placeholder="例如 Joe、Alice、Infra 小組 A" /></label>
+        <button class="button primary" type="button" id="export-plan-json">匯出我的流程 JSON</button>
+        <button class="button" type="button" id="export-plan-csv">匯出我的流程 CSV</button>
+      </div>
+      <div class="team-import-grid">
+        <label>匯入組員 JSON 檔<input id="import-plan-file" type="file" accept="application/json,.json" /></label>
+        <label>或貼上組員 JSON<textarea id="import-plan-text" rows="7" placeholder="貼上組員匯出的 JSON"></textarea></label>
+      </div>
+      <div class="planner-actions">
+        <button class="button primary" type="button" id="import-plan-json">匯入組員流程</button>
+        <button class="button" type="button" id="clear-team-plans">清空已匯入組員流程</button>
+      </div>
+      <p class="layout-help" id="team-import-status"></p>
+      <div id="team-plans-result" class="team-plans-result"></div>
+    </section>
+
+    <section id="outcomes" class="section-card" data-page="joe-page">
       <div class="section-heading">
         <p class="eyebrow">After Summit</p>
         <h2>會後輸出</h2>

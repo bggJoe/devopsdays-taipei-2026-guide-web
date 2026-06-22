@@ -29,7 +29,9 @@
     '"': '&quot;',
   }[char]));
   const selectedPlanKey = 'dodt2026:selected-plan';
+  const teamPlansKey = 'dodt2026:team-plans';
   let selectedSessionIds = new Set(JSON.parse(localStorage.getItem(selectedPlanKey) || '[]'));
+  let teamPlans = JSON.parse(localStorage.getItem(teamPlansKey) || '[]');
   const timeKey = (session) => `${session.date || ''} ${session.start || ''}`;
   const parseSpeaker = (speaker = '') => {
     const [name = '', company = ''] = String(speaker).split(/[｜|]/).map((part) => part.trim());
@@ -46,6 +48,8 @@
     bindEvents();
     renderSessions();
     renderPlanner();
+    renderTeamPlans();
+    activatePage(location.hash === '#joe' ? 'joe-page' : location.hash === '#team' ? 'team-page' : 'explorer-page');
     openSessionFromHash();
   }
 
@@ -392,10 +396,21 @@
     $('.close').addEventListener('click', () => $('#session-dialog').close());
     $('#print-plan').addEventListener('click', () => window.print());
     $('#clear-plan').addEventListener('click', clearPlanner);
+    $('#export-plan-json').addEventListener('click', () => exportMyPlan('json'));
+    $('#export-plan-csv').addEventListener('click', () => exportMyPlan('csv'));
+    $('#import-plan-json').addEventListener('click', importPlanFromTextarea);
+    $('#clear-team-plans').addEventListener('click', clearTeamPlans);
+    $('#import-plan-file').addEventListener('change', importPlanFromFile);
     $('#session-dialog').addEventListener('click', (event) => {
       if (event.target === $('#session-dialog')) $('#session-dialog').close();
     });
     document.addEventListener('click', (event) => {
+      const pageButton = event.target.closest('[data-page-target]');
+      if (pageButton) {
+        activatePage(pageButton.dataset.pageTarget);
+        return;
+      }
+
       const plannerButton = event.target.closest('[data-toggle-plan]');
       if (plannerButton) {
         togglePlannerSession(plannerButton.dataset.togglePlan);
@@ -415,6 +430,181 @@
   }
 
 
+
+
+  function activatePage(pageName) {
+    document.querySelectorAll('[data-page]').forEach((section) => {
+      section.hidden = section.dataset.page !== pageName;
+    });
+    document.querySelectorAll('[data-page-target]').forEach((button) => {
+      button.classList.toggle('is-active', button.dataset.pageTarget === pageName);
+    });
+    if (pageName === 'team-page') renderTeamPlans();
+    if (pageName === 'explorer-page') renderSessions();
+    location.hash = pageName === 'joe-page' ? 'joe' : pageName === 'team-page' ? 'team' : 'explorer';
+  }
+
+  function buildPlanPayload() {
+    const nickname = ($('#nickname-input').value || '').trim();
+    if (!nickname) throw new Error('請先輸入 nickname，讓組長知道這份流程是誰的。');
+    const selectedSessions = getSelectedSessions();
+    if (!selectedSessions.length) throw new Error('尚未選擇任何 session，請先到 Session Explorer 加入我的流程。');
+    return {
+      version: 1,
+      summit: data.meta.summit,
+      nickname,
+      exportedAt: new Date().toISOString(),
+      sessionIds: selectedSessions.map((session) => session.id),
+      sessions: selectedSessions.map((session) => ({
+        id: session.id,
+        day: session.day,
+        date: session.date,
+        start: session.start,
+        end: session.end,
+        room: session.room,
+        title: session.title,
+        speaker: session.speaker || '',
+        group: session.group,
+      })),
+    };
+  }
+
+  function exportMyPlan(format) {
+    try {
+      const payload = buildPlanPayload();
+      const safeName = payload.nickname.replace(/[^a-z0-9_-]+/gi, '-');
+      if (format === 'csv') {
+        const rows = [['nickname', 'day', 'date', 'start', 'end', 'room', 'title', 'speaker', 'session_id']];
+        payload.sessions.forEach((session) => rows.push([payload.nickname, session.day, session.date, session.start, session.end, session.room, session.title, session.speaker, session.id]));
+        downloadFile(`dodt2026-${safeName}-plan.csv`, rows.map((row) => row.map(csvCell).join(',')).join('\n'), 'text/csv;charset=utf-8');
+      } else {
+        downloadFile(`dodt2026-${safeName}-plan.json`, JSON.stringify(payload, null, 2), 'application/json');
+      }
+      setTeamStatus(`已匯出 ${payload.nickname} 的 ${payload.sessions.length} 場 session。`);
+    } catch (error) {
+      setTeamStatus(error.message, true);
+    }
+  }
+
+  function csvCell(value) {
+    return `"${String(value ?? '').replace(/"/g, '""')}"`;
+  }
+
+  function downloadFile(filename, content, type) {
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function importPlanFromTextarea() {
+    const text = $('#import-plan-text').value.trim();
+    if (!text) {
+      setTeamStatus('請選擇 JSON 檔或貼上組員 JSON。', true);
+      return;
+    }
+    importTeamPlan(text);
+  }
+
+  function importPlanFromFile(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => importTeamPlan(String(reader.result || ''));
+    reader.readAsText(file);
+    event.target.value = '';
+  }
+
+  function importTeamPlan(text) {
+    try {
+      const payload = JSON.parse(text);
+      if (!payload.nickname || !Array.isArray(payload.sessionIds)) throw new Error('JSON 格式不正確：需要 nickname 與 sessionIds。');
+      const validSessionIds = payload.sessionIds.filter((id) => sessionById[id]);
+      if (!validSessionIds.length) throw new Error('匯入資料沒有可對應到本議程的 session id。');
+      const normalized = {
+        version: 1,
+        nickname: String(payload.nickname).trim(),
+        importedAt: new Date().toISOString(),
+        sessionIds: [...new Set(validSessionIds)],
+      };
+      teamPlans = teamPlans.filter((plan) => plan.nickname !== normalized.nickname);
+      teamPlans.push(normalized);
+      localStorage.setItem(teamPlansKey, JSON.stringify(teamPlans));
+      $('#import-plan-text').value = '';
+      setTeamStatus(`已匯入 ${normalized.nickname} 的 ${normalized.sessionIds.length} 場 session。`);
+      renderTeamPlans();
+    } catch (error) {
+      setTeamStatus(error.message, true);
+    }
+  }
+
+  function clearTeamPlans() {
+    teamPlans = [];
+    localStorage.setItem(teamPlansKey, JSON.stringify(teamPlans));
+    setTeamStatus('已清空匯入的組員流程。');
+    renderTeamPlans();
+  }
+
+  function setTeamStatus(message, isError = false) {
+    const status = $('#team-import-status');
+    status.textContent = message;
+    status.classList.toggle('is-error', isError);
+  }
+
+  function renderTeamPlans() {
+    const root = $('#team-plans-result');
+    if (!root) return;
+    if (!teamPlans.length) {
+      root.innerHTML = '<div class="empty-planner"><h3>尚未匯入組員流程</h3><p>請請組員匯出 JSON 後，在此匯入；匯入結果會獨立於你的「我的流程」。</p></div>';
+      return;
+    }
+    const coverage = new Map();
+    teamPlans.forEach((plan) => {
+      plan.sessionIds.forEach((id) => {
+        if (!sessionById[id]) return;
+        const members = coverage.get(id) || [];
+        members.push(plan.nickname);
+        coverage.set(id, members);
+      });
+    });
+    const coverageRows = [...coverage.entries()]
+      .map(([id, members]) => ({ session: sessionById[id], members }))
+      .sort((a, b) => timeKey(a.session).localeCompare(timeKey(b.session)));
+    root.innerHTML = `
+      <div class="team-grid">
+        <section>
+          <h3>依組員查看</h3>
+          ${teamPlans.map(renderMemberPlan).join('')}
+        </section>
+        <section>
+          <h3>跨員 session 覆蓋</h3>
+          <div class="team-coverage">${coverageRows.map(renderCoverageRow).join('')}</div>
+        </section>
+      </div>
+    `;
+  }
+
+  function renderMemberPlan(plan) {
+    const selected = plan.sessionIds.map((id) => sessionById[id]).filter(Boolean).sort((a, b) => timeKey(a).localeCompare(timeKey(b)));
+    return `
+      <article class="member-plan">
+        <h4>${escapeHtml(plan.nickname)} <span>${selected.length} 場</span></h4>
+        <ol>${selected.map((session) => `<li>${escapeHtml(session.day)} ${escapeHtml(session.start)}–${escapeHtml(session.end)}｜${escapeHtml(session.title)}</li>`).join('')}</ol>
+      </article>
+    `;
+  }
+
+  function renderCoverageRow({ session, members }) {
+    return `
+      <article class="coverage-row">
+        <div><strong>${escapeHtml(session.day)} ${escapeHtml(session.start)}–${escapeHtml(session.end)}</strong><p>${escapeHtml(session.title)}</p></div>
+        <div class="badges">${members.map((member) => `<span class="badge persona">${escapeHtml(member)}</span>`).join('')}</div>
+      </article>
+    `;
+  }
 
   function togglePlannerSession(sessionId) {
     if (selectedSessionIds.has(sessionId)) {
