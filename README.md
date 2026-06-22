@@ -34,7 +34,7 @@ http://localhost:8000/
 6. 到「我的流程」查看已選結果，可輸出 PDF；到「組員流程彙整」輸入 nickname 匯出 JSON/CSV，或匯入其他組員 JSON 查看跨員 session 覆蓋。
 7. 最後展示「會後輸出」，說明可帶回公司整理成 reference architecture、治理 checklist 與 PoC backlog。
 
-## 檔案說明
+### 以本機網址展示
 
 - `web-app/index.html`：頁面結構與各區塊 anchor。
 - `web-app/styles.css`：RWD、卡片、timeline、dialog 與篩選器樣式。
