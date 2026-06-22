@@ -1,30 +1,60 @@
-# DevOpsDays Taipei 2026 Session Explorer Prototype
+# DevOpsDays Taipei 2026 Session Explorer
 
-這是一個純 HTML / CSS / JavaScript 的靜態 prototype。
+這是一個純 HTML / CSS / JavaScript 的零打包靜態 web app，用 DevSecOps / RAI / AI Coding 視角探索 DevOpsDays Taipei 2026 議程。
 
-## 如何打開
+## 如何展示 web
 
-直接用瀏覽器開啟：`web-app/index.html`
+### 最快方式：直接打開檔案
 
-不需要 npm install、build step、backend server 或 CDN。
+1. 在檔案總管或 Finder 中進入專案資料夾。
+2. 開啟 `web-app/index.html`。
+3. 瀏覽器會直接讀取同資料夾的 `data.js`，不需要 npm install、不需要 build、不需要 CDN，也不需要後端。
+
+### 以本機網址展示
+
+如果你要投影、分享本機網址，或避免瀏覽器對 `file://` 的限制，可以在專案根目錄執行：
+
+```bash
+python3 -m http.server 8000 --directory web-app
+```
+
+然後開啟：
+
+```text
+http://localhost:8000/
+```
+
+### 推薦展示流程
+
+1. 先選頁籤：「Session 探索/自選流程」給所有組員使用；「Joe 建議方案/評分」保留給 Joe；「組員流程彙整」用於匯入組員選課結果。
+2. 點「查看推薦路線」，展示兩天不衝突的主路線與每場 checklist。
+3. 到「探索」區使用搜尋與 Day / Group / Topic / 演講者 / 公司組織篩選；若要照議程挑選，切換「版面：所有可挑選卡片（依日期/時間）」，它會打破主題分組並依 Day 1 早到晚、Day 2 早到晚顯示。
+4. 在卡片按「加入我的流程」，建立自己的 session flow；系統會在「我的流程」區檢查時間衝突。
+5. 點任一 session 卡片，展示摘要、關鍵字、命中題目、聆聽目標、checklist，以及「整理對象」與「原網站標示」的差異。
+6. 到「我的流程」查看已選結果，可輸出 PDF；到「組員流程彙整」輸入 nickname 匯出 JSON/CSV，或匯入其他組員 JSON 查看跨員 session 覆蓋。
+7. 最後展示「會後輸出」，說明可帶回公司整理成 reference architecture、治理 checklist 與 PoC backlog。
 
 ## 檔案說明
 
-| 檔案 | 說明 |
-|---|---|
-| `index.html` | 頁面結構 |
-| `styles.css` | 簡易美觀樣式 |
-| `data.js` | Session 資料，使用 `window.SUMMIT_DATA` |
-| `app.js` | Render、filter、search、dialog、checklist |
+- `web-app/index.html`：頁面結構與各區塊 anchor。
+- `web-app/styles.css`：RWD、卡片、timeline、dialog 與篩選器樣式。
+- `web-app/app.js`：資料 render、搜尋、Day / Group / Topic / 演講者 / 公司組織篩選、排序、detail dialog、hash deep link、角色對象分析、checklist localStorage、自選流程、時間衝突檢查與列印/PDF 輸出。
+- `web-app/data.js`：由 `assets/devopsdays_2026_sessions.json` 產生的瀏覽器資料檔，內容為 `window.SUMMIT_DATA = ...`。
+- `assets/devopsdays_2026_sessions.json`：議程資料來源；已為目前資料中可對應到官方 `/session/` 頁面的 session 補上官方 level、language、tags 與適合聽眾。
 
-## 已實作功能
+## 更新資料
 
-- 大會總覽
-- 評分模型
-- 推薦路線 timeline
-- Session explorer
-- 搜尋與篩選
-- 排序
-- Session detail dialog
-- Checklist 勾選與 localStorage 保存
-- RWD 基礎版面
+若 JSON 來源更新，請重新產生 `web-app/data.js`：
+
+```bash
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+data = json.loads(Path('assets/devopsdays_2026_sessions.json').read_text(encoding='utf-8'))
+Path('web-app/data.js').write_text(
+    'window.SUMMIT_DATA = ' + json.dumps(data, ensure_ascii=False, indent=2) + ';\n',
+    encoding='utf-8',
+)
+PY
+```
