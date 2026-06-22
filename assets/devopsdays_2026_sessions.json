@@ -113,7 +113,20 @@
         "人類判斷在哪些節點必須保留？",
         "多模型協作會帶來哪些治理與紀錄需求？"
       ],
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4710",
+      "level": "進階",
+      "language": "中文",
+      "officialTags": [
+        "Developer Experience (DevX開發者體驗)"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "經營決策者 (Decision maker)"
+      ],
+      "speakerRole": "顧問",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4710"
     },
     {
       "id": "d1-workshop-agile-bootcamp",
@@ -137,7 +150,24 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4701",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "Culture & Agile"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "IT人員 / 全都做 (IT / I have to do everything)",
+        "非IT部門 (Non-IT)",
+        "經營決策者 (Decision maker)"
+      ],
+      "speakerRole": "Principal Engineer",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4701"
     },
     {
       "id": "d1-keynote-coding-agent-architect",
@@ -164,7 +194,20 @@
       "score": 3,
       "magic": 1,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4702",
+      "level": "進階",
+      "language": "中文",
+      "officialTags": [
+        "BizDevOps（價值驅動）"
+      ],
+      "officialAudience": [
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "經營決策者 (Decision maker)"
+      ],
+      "speakerRole": "Chief Architect",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4702"
     },
     {
       "id": "d1-workshop-devops-skill-ai-agent",
@@ -249,7 +292,18 @@
         "哪些風險要設 gate，而不是靠事後 review？",
         "是否能畫出公司版 Agentic SDLC？"
       ],
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4699",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "Agentic DevOps / AI-powered DevOps"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)"
+      ],
+      "speakerRole": "產品發展處 副總經理",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4699"
     },
     {
       "id": "d1-ai-cognitive-debt",
@@ -274,7 +328,21 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4704",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "Best Practices（成功案例最佳實踐）"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "經營決策者 (Decision maker)"
+      ],
+      "speakerRole": "Agile Coach",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4704"
     },
     {
       "id": "d1-devsecops-vuln-tracking",
@@ -341,7 +409,20 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4745",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "DataOps & MLOps"
+      ],
+      "officialAudience": [
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 全都做 (IT / I have to do everything)",
+        "經營決策者 (Decision maker)"
+      ],
+      "speakerRole": "技術顧問",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4745"
     },
     {
       "id": "d1-quality-ai-bootcamp",
@@ -366,7 +447,18 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4705",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "AI & DevOps 企業應用"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)"
+      ],
+      "speakerRole": "CEO / 兼任助理教授",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4705"
     },
     {
       "id": "d1-workshop-npm-supply-chain",
@@ -457,7 +549,20 @@
       "score": 0,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4703",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "CI/CD（持續整合部署）"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏開發 (IT / DEV)"
+      ],
+      "speakerRole": "負責人",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4703"
     },
     {
       "id": "d1-infra-platform-10y",
@@ -482,7 +587,22 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4725",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "Platform Engineering（平台工程）"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 全都做 (IT / I have to do everything)"
+      ],
+      "speakerRole": "產品發展部資深經理",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4725"
     },
     {
       "id": "d1-kagent-a2a-k8s",
@@ -509,7 +629,20 @@
       "score": 3,
       "magic": 1,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4742",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "Agentic DevOps / AI-powered DevOps"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "經營決策者 (Decision maker)"
+      ],
+      "speakerRole": "SRE",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4742"
     },
     {
       "id": "d1-flow-bootcamp",
@@ -534,7 +667,18 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4712",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "BizDevOps（價值驅動）"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)"
+      ],
+      "speakerRole": "Co-Organizer",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4712"
     },
     {
       "id": "d1-platform-genai",
@@ -559,7 +703,20 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4751",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "Platform Engineering（平台工程）"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "IT人員 / 全都做 (IT / I have to do everything)",
+        "經營決策者 (Decision maker)"
+      ],
+      "speakerRole": "member",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4751"
     },
     {
       "id": "d1-legacy-modernization-ai",
@@ -585,7 +742,20 @@
       "score": 3,
       "magic": 1,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4721",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "Agentic DevOps / AI-powered DevOps"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "IT人員 / 全都做 (IT / I have to do everything)"
+      ],
+      "speakerRole": "Team Leader",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4721"
     },
     {
       "id": "d1-ai-agent-oncall",
@@ -611,7 +781,19 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4715",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "AIOps（智慧維運）"
+      ],
+      "officialAudience": [
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏維運 (IT / OPS)"
+      ],
+      "speakerRole": "資訊副理",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4715"
     },
     {
       "id": "d1-bootcamp-engineer-role-ai",
@@ -730,7 +912,21 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4735",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "CI/CD（持續整合部署）"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 偏開發 (IT / DEV)"
+      ],
+      "speakerRole": "執行長",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4735"
     },
     {
       "id": "d1-gsi-sdd",
@@ -757,7 +953,18 @@
       "score": 3,
       "magic": 1,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4723",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "Developer Experience (DevX開發者體驗)"
+      ],
+      "officialAudience": [
+        "IT人員 / 偏開發 (IT / DEV)"
+      ],
+      "speakerRole": "後端軟體工程師",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4723"
     },
     {
       "id": "d1-agent-skills-mcp-playwright",
@@ -904,7 +1111,23 @@
       "score": 3,
       "magic": 1,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4741",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "AIOps（智慧維運）"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "IT人員 / 全都做 (IT / I have to do everything)",
+        "非IT部門 (Non-IT)"
+      ],
+      "speakerRole": "Staff Site Reliability Engineer",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4741"
     },
     {
       "id": "d1-one-person-devops",
@@ -930,7 +1153,21 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4730",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "Agentic DevOps / AI-powered DevOps"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 偏開發 (IT / DEV)"
+      ],
+      "speakerRole": "資訊室主任",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4730"
     },
     {
       "id": "d1-ai-layoff-responsibility",
@@ -955,7 +1192,18 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4728",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "AIOps（智慧維運）"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)"
+      ],
+      "speakerRole": "Director of Infrastructure Engineering",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4728"
     },
     {
       "id": "d2-opening",
@@ -1051,7 +1299,18 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4719",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "Agentic DevOps / AI-powered DevOps"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)"
+      ],
+      "speakerRole": "Prompter",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4719"
     },
     {
       "id": "d2-workshop-mcp-windows-ops",
@@ -1076,7 +1335,19 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4707",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "AIOps（智慧維運）"
+      ],
+      "officialAudience": [
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 全都做 (IT / I have to do everything)"
+      ],
+      "speakerRole": "Microsoft MVP",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4707"
     },
     {
       "id": "d2-keynote-qms-agile",
@@ -1100,7 +1371,22 @@
       "score": 0,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4695",
+      "level": "通識",
+      "language": "英文",
+      "interpretation": "即時中英文翻譯",
+      "officialTags": [
+        "Culture & Agile"
+      ],
+      "officialAudience": [
+        "DevOps老司機 (DevOps Veteran)",
+        "經營決策者 (Decision maker)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "IT人員 / 偏維運 (IT / OPS)"
+      ],
+      "speakerRole": "DX Innovation Center / Development & Quality Management Department",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4695"
     },
     {
       "id": "d2-keynote-okr-devops",
@@ -1125,7 +1411,20 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4697",
+      "level": "中階",
+      "language": "英文",
+      "interpretation": "即時中英文翻譯",
+      "officialTags": [
+        "Culture & Agile"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)"
+      ],
+      "speakerRole": "Head of Engineering",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4697"
     },
     {
       "id": "d2-workshop-go-ecs-llm-aiops",
@@ -1190,7 +1489,20 @@
       "score": 3,
       "magic": 1,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4734",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "Agentic DevOps / AI-powered DevOps"
+      ],
+      "officialAudience": [
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "IT人員 / 全都做 (IT / I have to do everything)"
+      ],
+      "speakerRole": "資深技術架構師",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4734"
     },
     {
       "id": "d2-workshop-cloud-code-reviewer",
@@ -1259,7 +1571,24 @@
       "score": 0,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4711",
+      "level": "進階",
+      "language": "中文",
+      "officialTags": [
+        "Best Practices（成功案例最佳實踐）"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 全都做 (IT / I have to do everything)",
+        "非IT部門 (Non-IT)",
+        "經營決策者 (Decision maker)"
+      ],
+      "speakerRole": "Lead Solutions Architecture / Staff Engineer",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4711"
     },
     {
       "id": "d2-ai-not-only-code-300-1500",
@@ -1327,7 +1656,18 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4727",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "Agentic DevOps / AI-powered DevOps"
+      ],
+      "officialAudience": [
+        "DevOps老司機 (DevOps Veteran)"
+      ],
+      "speakerRole": "顧問",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4727"
     },
     {
       "id": "d2-mcp-rca-pipeline",
@@ -1353,7 +1693,20 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4748",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "Agentic DevOps / AI-powered DevOps"
+      ],
+      "officialAudience": [
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 全都做 (IT / I have to do everything)"
+      ],
+      "speakerRole": "DevOps/SRE",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4748"
     },
     {
       "id": "d2-ai-devsecops-transformation",
@@ -1508,7 +1861,20 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4767",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "AIOps（智慧維運）"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏開發 (IT / DEV)"
+      ],
+      "speakerRole": "開發工程主管",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4767"
     },
     {
       "id": "d2-ai-software-supply-chain",
@@ -1585,7 +1951,22 @@
       "score": 3,
       "magic": 1,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4765",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "Agentic DevOps / AI-powered DevOps"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "IT人員 / 全都做 (IT / I have to do everything)"
+      ],
+      "speakerRole": "Senior Full Stack Engineer",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4765"
     },
     {
       "id": "d2-iac-cicd-safe-infra",
@@ -1611,7 +1992,22 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4749",
+      "level": "中階",
+      "language": "英文",
+      "interpretation": "即時中英文翻譯",
+      "officialTags": [
+        "CI/CD（持續整合部署）"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "IT人員 / 偏維運 (IT / OPS)"
+      ],
+      "speakerRole": "Cloud Architect",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4749"
     },
     {
       "id": "d2-observability-5b",
@@ -1634,7 +2030,20 @@
       "score": 0,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4716",
+      "level": "進階",
+      "language": "中文",
+      "officialTags": [
+        "Observability (可觀測性)"
+      ],
+      "officialAudience": [
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "IT人員 / 全都做 (IT / I have to do everything)"
+      ],
+      "speakerRole": "R&D Team Lead, Infrastructure",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4716"
     },
     {
       "id": "d2-llm-ml-pipeline-as-code",
@@ -1660,7 +2069,22 @@
       "score": 3,
       "magic": 1,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4752",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "DataOps & MLOps"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "經營決策者 (Decision maker)"
+      ],
+      "speakerRole": "Data Scientist",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4752"
     },
     {
       "id": "d2-sre-portal-regulated",
@@ -1685,7 +2109,18 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4758",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "SRE（服務可靠性工程）"
+      ],
+      "officialAudience": [
+        "IT人員 / 偏開發 (IT / DEV)"
+      ],
+      "speakerRole": "襄理",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4758"
     },
     {
       "id": "d2-otel-lakehouse-aiops",
@@ -1711,7 +2146,24 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4759",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "Observability (可觀測性)"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "經營決策者 (Decision maker)",
+        "非IT部門 (Non-IT)",
+        "IT人員 / 全都做 (IT / I have to do everything)"
+      ],
+      "speakerRole": "Data Engineer",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4759"
     },
     {
       "id": "d2-ai-driven-sbom-remediation",
@@ -1824,7 +2276,21 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4722",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "Observability (可觀測性)"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 全都做 (IT / I have to do everything)"
+      ],
+      "speakerRole": "副主任工程師",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4722"
     },
     {
       "id": "d2-group-decision-platform",
@@ -1933,7 +2399,21 @@
       "score": 1,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4761",
+      "level": "中階",
+      "language": "中文",
+      "officialTags": [
+        "DataOps & MLOps"
+      ],
+      "officialAudience": [
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 全都做 (IT / I have to do everything)",
+        "非IT部門 (Non-IT)",
+        "經營決策者 (Decision maker)"
+      ],
+      "speakerRole": "主任工程師 / DataOps",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4761"
     },
     {
       "id": "d2-vibe-to-ai-native-devops",
@@ -2136,7 +2616,24 @@
       "score": 0,
       "magic": 0,
       "recommended": false,
-      "source": "agenda_pdf"
+      "source": "agenda_pdf",
+      "session_url": "https://devopsdays.tw/2026/session/4845",
+      "level": "通識",
+      "language": "中文",
+      "officialTags": [
+        "AI & DevOps 企業應用"
+      ],
+      "officialAudience": [
+        "DevOps新手 (Newbie)",
+        "DevOps老司機 (DevOps Veteran)",
+        "IT人員 / 偏維運 (IT / OPS)",
+        "IT人員 / 偏開發 (IT / DEV)",
+        "IT人員 / 全都做 (IT / I have to do everything)",
+        "非IT部門 (Non-IT)",
+        "經營決策者 (Decision maker)"
+      ],
+      "speakerRole": "副總編輯",
+      "officialTagSource": "https://devopsdays.tw/2026/session/4845"
     }
   ],
   "recommendedPath": [

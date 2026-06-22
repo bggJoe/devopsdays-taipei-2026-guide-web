@@ -179,6 +179,11 @@
     root.innerHTML = '';
     $('#result-count').textContent = `顯示 ${filteredSessions.length} / ${sessions.length} 場 session`;
 
+    if ($('#layout-filter').value === 'time') {
+      renderSessionsByTime(root, filteredSessions);
+      return;
+    }
+
     Object.entries(groupLabels).forEach(([groupKey, label]) => {
       const groupSessions = filteredSessions.filter((session) => session.group === groupKey);
       if (!groupSessions.length) return;
@@ -190,6 +195,36 @@
         <div class="cards">${groupSessions.map(renderSessionCard).join('')}</div>
       `;
       root.appendChild(details);
+    });
+  }
+
+  function renderSessionsByTime(root, filteredSessions) {
+    const byDay = filteredSessions.reduce((acc, session) => {
+      acc[session.day] = acc[session.day] || [];
+      acc[session.day].push(session);
+      return acc;
+    }, {});
+
+    Object.entries(byDay).forEach(([day, daySessions]) => {
+      const daySection = createElement('section', 'time-day-section');
+      const bySlot = daySessions.reduce((acc, session) => {
+        const slot = `${session.start}–${session.end}`;
+        acc[slot] = acc[slot] || [];
+        acc[slot].push(session);
+        return acc;
+      }, {});
+      daySection.innerHTML = `
+        <h3 class="day-title">${escapeHtml(day)}</h3>
+        <div class="time-layout">
+          ${Object.entries(bySlot).map(([slot, slotSessions]) => `
+            <section class="time-slot">
+              <div class="time-slot-label">${escapeHtml(slot)}</div>
+              <div class="time-slot-cards">${slotSessions.map(renderSessionCard).join('')}</div>
+            </section>
+          `).join('')}
+        </div>
+      `;
+      root.appendChild(daySection);
     });
   }
 
