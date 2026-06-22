@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DevOpsDays Taipei 2026 Session Explorer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">DevSecOps / RAI / AI Coding Focus</p>
+      <h1>DevOpsDays Taipei 2026 Session Explorer</h1>
+    </div>
+    <nav aria-label="主要導覽">
+      <a href="#overview">總覽</a>
+      <a href="#path">推薦路線</a>
+      <a href="#explorer">探索</a>
+      <a href="#planner">我的流程</a>
+      <a href="#outcomes">會後輸出</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="overview" class="hero section-card">
+      <div>
+        <p class="eyebrow" id="summit-dates"></p>
+        <h2>用資安與 AI 開發治理視角，快速找到最值得聽的場次</h2>
+        <p id="summit-overview"></p>
+        <p class="role" id="role-context"></p>
+        <div class="hero-actions">
+          <a class="button primary" href="#path">查看推薦路線</a>
+          <a class="button" href="#explorer">開始探索 session</a>
+          <a class="button" href="#planner">查看我的流程</a>
+        </div>
+      </div>
+      <aside class="reading-order" aria-labelledby="reading-order-title">
+        <h3 id="reading-order-title">建議閱讀順序</h3>
+        <ol>
+          <li>總覽：確認任務背景</li>
+          <li>評分：理解優先順序</li>
+          <li>推薦路線：先鎖定主路線</li>
+          <li>分組探索：比較可替換場次</li>
+          <li>自選流程：勾選 session 並檢查衝突</li>
+          <li>會後輸出：整理內部產出</li>
+        </ol>
+      </aside>
+    </section>
+
+    <section id="score" class="section-card">
+      <div class="section-heading">
+        <p class="eyebrow">Score Legend</p>
+        <h2>題目評分模型</h2>
+      </div>
+      <div id="score-legend" class="score-grid"></div>
+    </section>
+
+    <section id="path" class="section-card">
+      <div class="section-heading">
+        <p class="eyebrow">Recommended Path</p>
+        <h2>不衝突主推薦路線</h2>
+        <p>先照這條路線聽，再用 Explorer 補看備選場次。</p>
+      </div>
+      <div id="recommended-path" class="timeline"></div>
+    </section>
+
+    <section id="explorer" class="section-card">
+      <div class="section-heading">
+        <p class="eyebrow">Session Explorer</p>
+        <h2>分組探索所有議程</h2>
+      </div>
+      <form class="filters" id="filters">
+        <label>搜尋<input id="search" type="search" placeholder="title / speaker / keyword / summary" /></label>
+        <label>日期<select id="day-filter"><option value="all">All days</option></select></label>
+        <label>分組<select id="group-filter"><option value="all">All groups</option></select></label>
+        <label>題目<select id="topic-filter"><option value="all">All topics</option></select></label>
+        <label>演講者<select id="speaker-filter"><option value="all">All speakers</option></select></label>
+        <label>公司/組織<select id="company-filter"><option value="all">All orgs</option></select></label>
+        <label>排序<select id="sort-filter"><option value="time">時間順</option><option value="score">分數高到低</option><option value="magic">魔力高到低</option></select></label>
+        <label>版面<select id="layout-filter"><option value="group">分組卡片</option><option value="time">所有可挑選卡片（依日期/時間）</option></select></label>
+        <label class="checkbox"><input id="show-speaker" type="checkbox" checked /> 顯示講者/組織</label>
+        <label class="checkbox"><input id="recommended-only" type="checkbox" /> 只看推薦</label>
+      </form>
+      <p class="layout-help" id="layout-help"></p>
+      <p class="result-count" id="result-count"></p>
+      <div id="session-groups" class="group-list"></div>
+    </section>
+
+    <section id="planner" class="section-card planner-section">
+      <div class="section-heading">
+        <p class="eyebrow">My Agenda</p>
+        <h2>我的自選流程</h2>
+        <p>在 Session Explorer 的卡片上按「加入我的流程」，這裡會依日期與時間排序，並自動檢查時間衝突。可用瀏覽器列印功能輸出 PDF。</p>
+      </div>
+      <div class="planner-actions">
+        <button class="button primary" type="button" id="print-plan">輸出 PDF / 列印</button>
+        <button class="button" type="button" id="clear-plan">清空我的流程</button>
+      </div>
+      <div id="planner-alerts" class="planner-alerts" aria-live="polite"></div>
+      <div id="planner-summary" class="planner-summary"></div>
+      <div id="planner-result" class="planner-result"></div>
+    </section>
+
+    <section id="outcomes" class="section-card">
+      <div class="section-heading">
+        <p class="eyebrow">After Summit</p>
+        <h2>會後輸出</h2>
+      </div>
+      <div id="outcome-cards" class="outcome-grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>資料整理版本：<span id="last-reviewed"></span>。實際議程以大會當日公告為主。</p>
+  </footer>
+
+  <dialog id="session-dialog">
+    <article class="dialog-card">
+      <button class="close" type="button" value="cancel" aria-label="關閉">×</button>
+      <div id="session-detail"></div>
+    </article>
+  </dialog>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
