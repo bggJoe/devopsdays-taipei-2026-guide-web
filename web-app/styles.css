@@ -800,3 +800,134 @@ dialog::backdrop {
     grid-template-columns: 1fr;
   }
 }
+
+.notes-source-card,
+.notes-workspace,
+.notes-toolbar,
+.post-note-card {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.notes-source-card {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.45fr);
+  align-items: start;
+  padding: 1rem;
+  border: 1px solid rgba(49, 87, 213, 0.25);
+  border-radius: 20px;
+  background: #f8fbff;
+}
+
+.notes-source-status {
+  padding: 0.85rem;
+  border-radius: 16px;
+  background: #ffffff;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.notes-workspace {
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
+}
+
+.notes-capture-panel,
+.report-template-panel {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+.notes-capture-panel textarea {
+  width: 100%;
+  padding: 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  font: inherit;
+  resize: vertical;
+}
+
+.notes-toolbar {
+  grid-template-columns: minmax(220px, 1fr) minmax(180px, 0.35fr);
+  align-items: end;
+}
+
+.notes-toolbar label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.notes-toolbar input,
+.notes-toolbar select {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--ink);
+  font: inherit;
+}
+
+.notes-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.post-note-card {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--brand-2);
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+.post-note-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+}
+
+.note-blocks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.note-block {
+  padding: 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+.note-block h4 {
+  margin: 0 0 0.5rem;
+}
+
+.note-block ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.note-block.quote {
+  border-color: #c4b5fd;
+  background: #f5f3ff;
+}
+
+@media (max-width: 900px) {
+  .notes-source-card,
+  .notes-workspace,
+  .notes-toolbar,
+  .note-blocks {
+    grid-template-columns: 1fr;
+  }
+
+  .post-note-head {
+    display: grid;
+  }
+}

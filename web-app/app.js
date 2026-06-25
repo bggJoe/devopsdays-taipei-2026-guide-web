@@ -30,8 +30,10 @@
   }[char]));
   const selectedPlanKey = 'dodt2026:selected-plan';
   const teamPlansKey = 'dodt2026:team-plans';
+  const importedNotesKey = 'dodt2026:post-event-notes';
   let selectedSessionIds = new Set(JSON.parse(localStorage.getItem(selectedPlanKey) || '[]'));
   let teamPlans = JSON.parse(localStorage.getItem(teamPlansKey) || '[]');
+  let importedNotes = JSON.parse(localStorage.getItem(importedNotesKey) || '[]');
   const timeKey = (session) => `${session.date || ''} ${session.start || ''}`;
   const parseSpeaker = (speaker = '') => {
     const [name = '', company = ''] = String(speaker).split(/[｜|]/).map((part) => part.trim());
@@ -49,7 +51,8 @@
     renderSessions();
     renderPlanner();
     renderTeamPlans();
-    activatePage(location.hash === '#joe' ? 'joe-page' : location.hash === '#team' ? 'team-page' : 'explorer-page');
+    renderPostEventNotes();
+    activatePage(location.hash === '#joe' ? 'joe-page' : location.hash === '#team' ? 'team-page' : location.hash === '#notes' ? 'notes-page' : 'explorer-page');
     openSessionFromHash();
   }
 
@@ -401,6 +404,10 @@
     $('#import-plan-json').addEventListener('click', importPlanFromTextarea);
     $('#clear-team-plans').addEventListener('click', clearTeamPlans);
     $('#import-plan-file').addEventListener('change', importPlanFromFile);
+    $('#parse-notes-markdown').addEventListener('click', parseNotesMarkdown);
+    $('#clear-notes-markdown').addEventListener('click', clearImportedNotes);
+    $('#notes-search').addEventListener('input', renderPostEventNotes);
+    $('#notes-lens').addEventListener('change', renderPostEventNotes);
     $('#session-dialog').addEventListener('click', (event) => {
       if (event.target === $('#session-dialog')) $('#session-dialog').close();
     });
@@ -431,6 +438,105 @@
 
 
 
+  function getPostEventNotes() {
+    const seed = data.postEventNotes && Array.isArray(data.postEventNotes.sessions) ? data.postEventNotes.sessions : [];
+    return [...seed, ...importedNotes].sort((a, b) => `${a.date || ''} ${a.start || ''}`.localeCompare(`${b.date || ''} ${b.start || ''}`));
+  }
+
+  function renderPostEventNotes() {
+    const config = data.postEventNotes || {};
+    const source = config.source || {};
+    const sourceLink = $('#notes-source-link');
+    if (!sourceLink) return;
+    $('#notes-source-summary').textContent = `${source.title || 'HackMD 共同筆記'}｜${source.leftNavInstruction || ''}`;
+    sourceLink.href = source.url || '#';
+    $('#notes-source-status').innerHTML = `
+      <span class="badge recommended">${escapeHtml(source.capturedAt || data.meta.lastReviewed)}</span>
+      <p>${escapeHtml(source.status || '尚未建立抓取狀態。')}</p>
+    `;
+    $('#report-outline').innerHTML = (config.reportOutline || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+
+    const query = ($('#notes-search').value || '').trim().toLowerCase();
+    const lens = $('#notes-lens').value;
+    const notes = getPostEventNotes().filter((note) => {
+      const haystack = [note.title, note.speaker, note.room, ...(note.notes || []), ...(note.takeaways || []), ...(note.actions || []), ...(note.quotes || [])].join(' ').toLowerCase();
+      return !query || haystack.includes(query);
+    });
+    $('#notes-result-count').textContent = `顯示 ${notes.length} 筆會後 session 筆記`;
+    $('#notes-list').innerHTML = notes.length ? notes.map((note) => renderPostEventNoteCard(note, lens)).join('') : '<div class="empty-planner"><h3>尚無符合條件的筆記</h3><p>請調整搜尋，或貼上 HackMD Markdown 後解析。</p></div>';
+  }
+
+  function renderPostEventNoteCard(note, lens) {
+    const blocks = [];
+    if (lens === 'all' || lens === 'takeaway') blocks.push(renderNoteList('重點摘要', note.takeaways || note.notes || []));
+    if (lens === 'all' || lens === 'action') blocks.push(renderNoteList('可落地行動項', note.actions || []));
+    if (lens === 'all' || lens === 'quote') blocks.push(renderNoteList('可引用原文', note.quotes || [], 'quote'));
+    return `
+      <article class="post-note-card">
+        <div class="post-note-head">
+          <div>
+            <p class="eyebrow">${escapeHtml(note.day || '')}｜${escapeHtml(note.start || '')}–${escapeHtml(note.end || '')}｜${escapeHtml(note.room || '')}</p>
+            <h3>${escapeHtml(note.title || '未命名 session')}</h3>
+            <p class="meta">${escapeHtml(note.speaker || '')}</p>
+          </div>
+          <a class="button" href="${escapeHtml(note.sourceUrl || (data.postEventNotes && data.postEventNotes.source && data.postEventNotes.source.url) || '#')}" target="_blank" rel="noreferrer">原始筆記</a>
+        </div>
+        <div class="note-blocks">${blocks.join('')}</div>
+      </article>
+    `;
+  }
+
+  function renderNoteList(title, items, variant = '') {
+    if (!items.length) return '';
+    return `<section class="note-block ${variant}"><h4>${escapeHtml(title)}</h4><ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></section>`;
+  }
+
+  function parseNotesMarkdown() {
+    const text = $('#notes-markdown-input').value.trim();
+    if (!text) {
+      setNotesStatus('請先貼上 HackMD Markdown 內容。', true);
+      return;
+    }
+    const titleMatch = text.match(/^#\s+(.+)$/m) || text.match(/^##\s+(.+)$/m);
+    const bullets = [...text.matchAll(/^[-*]\s+(.+)$/gm)].map((match) => match[1].trim()).filter(Boolean);
+    const paragraphs = text.split(/\n{2,}/).map((part) => part.replace(/^#+\s*/gm, '').trim()).filter((part) => part && !part.startsWith('---'));
+    const note = {
+      id: `imported-${Date.now()}`,
+      day: 'Day 1',
+      date: '2026-06-25',
+      start: '',
+      end: '',
+      title: titleMatch ? titleMatch[1].trim() : '貼上匯入的 HackMD 筆記',
+      speaker: '',
+      room: '',
+      sourceUrl: data.postEventNotes && data.postEventNotes.source ? data.postEventNotes.source.url : '',
+      captureStatus: 'manual-markdown-import',
+      notes: bullets.length ? bullets : paragraphs.slice(0, 6),
+      takeaways: (bullets.length ? bullets : paragraphs).slice(0, 5),
+      actions: ['回顧這份筆記，補上對公司流程的影響、owner 與下一步。'],
+      quotes: paragraphs.slice(0, 2),
+    };
+    importedNotes = [note, ...importedNotes].slice(0, 20);
+    localStorage.setItem(importedNotesKey, JSON.stringify(importedNotes));
+    setNotesStatus(`已解析「${note.title}」，並暫存在本瀏覽器。`);
+    $('#notes-markdown-input').value = '';
+    renderPostEventNotes();
+  }
+
+  function clearImportedNotes() {
+    importedNotes = [];
+    localStorage.setItem(importedNotesKey, JSON.stringify(importedNotes));
+    $('#notes-markdown-input').value = '';
+    setNotesStatus('已清空貼上匯入的暫存筆記。');
+    renderPostEventNotes();
+  }
+
+  function setNotesStatus(message, isError = false) {
+    const status = $('#notes-import-status');
+    status.textContent = message;
+    status.classList.toggle('is-error', isError);
+  }
+
 
   function activatePage(pageName) {
     document.querySelectorAll('[data-page]').forEach((section) => {
@@ -440,8 +546,9 @@
       button.classList.toggle('is-active', button.dataset.pageTarget === pageName);
     });
     if (pageName === 'team-page') renderTeamPlans();
+    if (pageName === 'notes-page') renderPostEventNotes();
     if (pageName === 'explorer-page') renderSessions();
-    location.hash = pageName === 'joe-page' ? 'joe' : pageName === 'team-page' ? 'team' : 'explorer';
+    location.hash = pageName === 'joe-page' ? 'joe' : pageName === 'team-page' ? 'team' : pageName === 'notes-page' ? 'notes' : 'explorer';
   }
 
   function buildPlanPayload() {
