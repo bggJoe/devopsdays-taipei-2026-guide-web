@@ -16,6 +16,7 @@
       <button class="tab-button is-active" type="button" data-page-target="explorer-page">Session 探索/自選流程</button>
       <button class="tab-button" type="button" data-page-target="joe-page">Joe 建議方案/評分</button>
       <button class="tab-button" type="button" data-page-target="team-page">組員流程彙整</button>
+      <button class="tab-button" type="button" data-page-target="notes-page">Day 1 會後筆記/報告</button>
     </nav>
   </header>
 
@@ -97,6 +98,44 @@
       <div id="planner-alerts" class="planner-alerts" aria-live="polite"></div>
       <div id="planner-summary" class="planner-summary"></div>
       <div id="planner-result" class="planner-result"></div>
+    </section>
+
+    <section id="post-notes" class="section-card" data-page="notes-page" hidden>
+      <div class="section-heading">
+        <p class="eyebrow">Post-event Notes</p>
+        <h2>Day 1 會議紀錄整理台</h2>
+        <p>把 HackMD 共同筆記的逐場內容轉成「會後簡報/報告」格式：先看抓取狀態，再依 session 摘要重點、行動項與可引用原文。</p>
+      </div>
+      <div class="notes-source-card">
+        <div>
+          <h3>共同筆記來源</h3>
+          <p id="notes-source-summary"></p>
+          <a class="button primary" id="notes-source-link" href="#" target="_blank" rel="noreferrer">開啟 HackMD 共同筆記</a>
+        </div>
+        <div class="notes-source-status" id="notes-source-status"></div>
+      </div>
+      <div class="notes-workspace">
+        <section class="notes-capture-panel">
+          <h3>抓取/匯入內容</h3>
+          <p class="layout-help">HackMD 左側目錄項目背後是逐場筆記 URL。若瀏覽器安全限制或登入狀態導致無法直接跨站讀取，請在 HackMD 使用「/download」匯出 Markdown 後貼到下方；頁面會保留來源 URL 與整理欄位。</p>
+          <textarea id="notes-markdown-input" rows="10" placeholder="貼上 HackMD Markdown 會議紀錄，例如：# Welcome opening ..."></textarea>
+          <div class="planner-actions">
+            <button class="button primary" type="button" id="parse-notes-markdown">解析貼上的會議紀錄</button>
+            <button class="button" type="button" id="clear-notes-markdown">清空暫存筆記</button>
+          </div>
+          <p class="layout-help" id="notes-import-status"></p>
+        </section>
+        <section class="report-template-panel">
+          <h3>會後報告骨架</h3>
+          <ol id="report-outline"></ol>
+        </section>
+      </div>
+      <div class="notes-toolbar">
+        <label>搜尋筆記<input id="notes-search" type="search" placeholder="session / 講者 / 內容關鍵字" /></label>
+        <label>報告觀點<select id="notes-lens"><option value="all">全部</option><option value="takeaway">重點摘要</option><option value="action">行動項</option><option value="quote">可引用內容</option></select></label>
+      </div>
+      <p class="result-count" id="notes-result-count"></p>
+      <div id="notes-list" class="notes-list"></div>
     </section>
 
     <section id="team-plans" class="section-card" data-page="team-page" hidden>

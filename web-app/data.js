@@ -2676,5 +2676,50 @@ window.SUMMIT_DATA = {
     "AI supply chain inventory checklist",
     "SBOM remediation workflow",
     "Release traceability policy"
-  ]
+  ],
+  "postEventNotes": {
+    "source": {
+      "title": "DevOpsDays Taipei 2026 共同筆記",
+      "url": "https://hackmd.io/@DevOpsDay/2026/%2FSkz9AmKbMx",
+      "capturedAt": "2026-06-25",
+      "status": "已建立 Day 1 會後整理工作台；內嵌第一筆從公開頁面可見內容，並支援貼上 HackMD /download Markdown 後解析。",
+      "leftNavInstruction": "依 HackMD 左側 6/25（四）議程項目逐場匯入。"
+    },
+    "reportOutline": [
+      "一句話結論：今天對公司 DevSecOps / RAI / AI Coding 的最大啟發",
+      "3–5 個重點摘要：每點對應到一場 session 與證據",
+      "可落地行動項：分成 1 週、1 個月、1 季",
+      "風險與限制：哪些內容需要回公司驗證",
+      "附件：原始 HackMD 連結與逐場筆記摘錄"
+    ],
+    "sessions": [
+      {
+        "id": "hackmd-d1-welcome-opening",
+        "day": "Day 1",
+        "date": "2026-06-25",
+        "start": "09:30",
+        "end": "09:40",
+        "title": "Welcome opening - 陳正瑋（艦長）",
+        "speaker": "陳正瑋（艦長）",
+        "room": "ABCDEF 會議室",
+        "sourceUrl": "https://hackmd.io/@DevOpsDay/2026/%2FSkz9AmKbMx",
+        "captureStatus": "from-visible-public-page",
+        "notes": [
+          "大量使用 AI 跟大量使用工具漸漸減少技能，這可能要放在心上的。",
+          "這是第九次 DevOpsDays Taipei，明年會是第十次；提到是否還需要 DevOps Taipei 的反思。"
+        ],
+        "takeaways": [
+          "AI 導入不只看效率，也要追蹤技能退化與團隊能力維持。",
+          "開場訊息適合作為會後報告的背景：活動已進入第九屆，社群開始反思 DevOps 的下一階段價值。"
+        ],
+        "actions": [
+          "把「AI 使用造成技能退化」列入內部 AI Coding 治理風險清單。",
+          "在 Day 1 報告開頭補上社群對 DevOps / AI 轉型的反思脈絡。"
+        ],
+        "quotes": [
+          "大量使用 AI 跟大量使用工具漸漸減少技能，這可能要放在心上的。"
+        ]
+      }
+    ]
+  }
 };
